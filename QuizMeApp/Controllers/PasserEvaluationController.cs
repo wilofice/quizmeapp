@@ -53,7 +53,7 @@ namespace QuizMeApp.Controllers
             var question = db.Questions.Where(rq => rq.Id == lastquestion).Single();
             string userId = (string) Session["userId"];
 
-            var old_questions = db.Reponses.Include(rp => rp.Apprenant && )
+            var old_questions = db.Reponses.Include(rp => rp.Apprenant);
 
             return View(question);
         }
