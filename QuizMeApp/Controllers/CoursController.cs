@@ -50,6 +50,17 @@ namespace QuizMeApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,intitule,date_creation,description,EnseignantId")] Cours cours)
         {
+            DateTime d = DateTime.Now;
+            string day = d.Day + "";
+            string month = d.Month + "";
+            string yeah = d.Year + "";
+            string date = day + "/" + month + "/" + yeah;
+            cours.date_creation = date;
+
+            string userId = (string)Session["userId"];
+            cours.EnseignantId = userId;
+            Enseignant ens = db.Enseignants.Where(en => en.ID == userId).Single();
+            cours.Enseignant = ens;
             if (ModelState.IsValid)
             {
                 db.Cours.Add(cours);

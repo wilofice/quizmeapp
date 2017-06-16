@@ -37,9 +37,14 @@ namespace QuizMeApp.Controllers
         }
 
         // GET: Options/Create
-        public ActionResult Create()
+        public ActionResult Create(int id = 0)
         {
-            ViewBag.QuestionId = new SelectList(db.Questions, "Id", "enonce");
+            if(id == 0)
+            {
+                ViewBag.QuestionId = new SelectList(db.Questions, "Id", "enonce");
+                return View();
+            }
+            ViewBag.QuestionId = new SelectList(db.Questions.Where(q => q.Id == id), "Id", "enonce");
             return View();
         }
 

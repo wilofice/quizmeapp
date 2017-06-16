@@ -37,11 +37,19 @@ namespace QuizMeApp.Controllers
         }
 
         // GET: Questions/Create
-        public ActionResult Create()
+        public ActionResult Create(int evaluationId = 0)
         {
-            ViewBag.EvaluationId = new SelectList(db.Evaluations, "Id", "date_creation");
+            if(evaluationId == 0)
+            {
+                ViewBag.EvaluationId = new SelectList(db.Evaluations, "Id", "description");
+                return View();
+            }
+
+            ViewBag.EvaluationId = new SelectList(db.Evaluations.Where(ev => ev.Id == evaluationId), "Id", "description");
             return View();
         }
+
+        
 
         // POST: Questions/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 

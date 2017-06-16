@@ -50,6 +50,17 @@ namespace QuizMeApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,date_creation,description,type,scoreSuccess,EnseignantId")] Evaluation evaluation)
         {
+            DateTime d = DateTime.Now;
+            string day = d.Day + "";
+            string month = d.Month + "";
+            string yeah = d.Year + "";
+            string date = day + "/" + month + "/" + yeah;
+            evaluation.date_creation = date;
+
+            string userId = (string)Session["userId"];
+            evaluation.EnseignantId = userId;
+            Enseignant ens = db.Enseignants.Where(en => en.ID == userId).Single();
+            evaluation.Enseignant = ens;
             if (ModelState.IsValid)
             {
                 db.Evaluations.Add(evaluation);

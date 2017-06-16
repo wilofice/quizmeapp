@@ -19,5 +19,7 @@ namespace QuizMeApp.Models
 
         [ForeignKey("EnseignantId")]
         public virtual Enseignant Enseignant { get; set; }
+
+        public virtual ICollection<Objectif> Objectifs { get; set; }
     }
 }

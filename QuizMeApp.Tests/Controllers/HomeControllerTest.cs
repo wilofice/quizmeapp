@@ -13,7 +13,7 @@ namespace QuizMeApp.Tests.Controllers
     public class HomeControllerTest
     {
         [TestMethod]
-        public void Index()
+        public void IndexHome()
         {
             // Arrange
             HomeController controller = new HomeController();
@@ -26,7 +26,7 @@ namespace QuizMeApp.Tests.Controllers
         }
 
         [TestMethod]
-        public void About()
+        public void AboutHome()
         {
             // Arrange
             HomeController controller = new HomeController();
@@ -39,13 +39,25 @@ namespace QuizMeApp.Tests.Controllers
         }
 
         [TestMethod]
-        public void Contact()
+        public void ContactHome()
         {
             // Arrange
             HomeController controller = new HomeController();
 
             // Act
             ViewResult result = controller.Contact() as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+        }
+
+        public void AcceuilHome(string s)
+        {
+            // Arrange
+            HomeController controller = new HomeController();
+
+            // Act
+            ViewResult result = controller.Acceuil(s) as ViewResult;
 
             // Assert
             Assert.IsNotNull(result);

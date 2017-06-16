@@ -10,7 +10,12 @@ namespace QuizMeApp.Controllers
     {
         public ActionResult Acceuil(string categorie)
         {
-            if (categorie.Equals("Enseignant")) return View("HomeEnseignant");
+            if (categorie.Equals("Enseignant"))
+            {
+                //return View("HomeEnseignant");
+                return RedirectToAction("Index", "Cours");
+            }
+            //return RedirectToAction("Index", "Evaluations");
             return View("HomeEtudiant");
         }
 
