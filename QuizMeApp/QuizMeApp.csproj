@@ -205,6 +205,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ObjectifsController.cs" />
     <Compile Include="Controllers\OptionsController.cs" />
+    <Compile Include="Controllers\PasserEvaluationController.cs" />
     <Compile Include="Controllers\QuestionsController.cs" />
     <Compile Include="Controllers\ReponsesController.cs" />
     <Compile Include="Controllers\ScoresController.cs" />
@@ -219,6 +220,10 @@
     <Compile Include="Migrations\201706160424139_firstmigration1.cs" />
     <Compile Include="Migrations\201706160424139_firstmigration1.Designer.cs">
       <DependentUpon>201706160424139_firstmigration1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706161128275_firstmigration2.cs" />
+    <Compile Include="Migrations\201706161128275_firstmigration2.Designer.cs">
+      <DependentUpon>201706161128275_firstmigration2.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -315,11 +320,6 @@
     <Content Include="Views\Cours\Details.cshtml" />
     <Content Include="Views\Cours\Edit.cshtml" />
     <Content Include="Views\Cours\Index.cshtml" />
-    <Content Include="Views\Objectifs\Create.cshtml" />
-    <Content Include="Views\Objectifs\Delete.cshtml" />
-    <Content Include="Views\Objectifs\Details.cshtml" />
-    <Content Include="Views\Objectifs\Edit.cshtml" />
-    <Content Include="Views\Objectifs\Index.cshtml" />
     <Content Include="Views\SousObjectifs\Create.cshtml" />
     <Content Include="Views\SousObjectifs\Delete.cshtml" />
     <Content Include="Views\SousObjectifs\Details.cshtml" />
@@ -355,6 +355,18 @@
     <Content Include="Views\Certificats\Details.cshtml" />
     <Content Include="Views\Certificats\Edit.cshtml" />
     <Content Include="Views\Certificats\Index.cshtml" />
+    <Content Include="Views\Objectifs\Create.cshtml" />
+    <Content Include="Views\Objectifs\Delete.cshtml" />
+    <Content Include="Views\Objectifs\Details.cshtml" />
+    <Content Include="Views\Objectifs\Edit.cshtml" />
+    <Content Include="Views\Objectifs\Index.cshtml" />
+    <Content Include="Views\PasserEvaluation\Create.cshtml" />
+    <Content Include="Views\PasserEvaluation\Delete.cshtml" />
+    <Content Include="Views\PasserEvaluation\LancerEvaluation.cshtml" />
+    <Content Include="Views\PasserEvaluation\Edit.cshtml" />
+    <Content Include="Views\PasserEvaluation\Index.cshtml" />
+    <None Include="Views\PasserEvaluation\pLancerEvaluation.cshtml" />
+    <Content Include="Views\PasserEvaluation\Resultat.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -373,6 +385,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201706160424139_firstmigration1.resx">
       <DependentUpon>201706160424139_firstmigration1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706161128275_firstmigration2.resx">
+      <DependentUpon>201706161128275_firstmigration2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

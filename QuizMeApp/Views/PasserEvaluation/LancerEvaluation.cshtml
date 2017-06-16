@@ -1,0 +1,78 @@
+﻿@model QuizMeApp.Models.Question
+
+@{
+    ViewBag.Title = "Test";
+}
+
+<h2>Question</h2>
+
+<p>Enonce: @Model.enonce</p>
+<form action="PasserEvaluation/VerifierReponse">
+
+    @foreach (var item in Model.Options)
+    {
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <div class="col-md-2 radio">
+                    @Html.RadioButton("intitule", item.intitule)
+                    @Html.Label("intitule", item.intitule)
+                </div>
+            </div>
+        </div>
+    }
+
+    <input type="text" name="questionId" value="@Model.Id" style="display: none;"/>
+    <input type="submit" class="btn btn-default" value="Valider"/>
+</form>
+
+
+@*<div>
+    <h4>Question</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Evaluation.date_creation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Evaluation.date_creation)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.enonce)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.enonce)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.point)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.point)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.niveauDifficulte)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.niveauDifficulte)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.explication)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.explication)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>*@

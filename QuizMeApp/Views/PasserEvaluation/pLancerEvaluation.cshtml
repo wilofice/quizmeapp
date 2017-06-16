@@ -9,6 +9,18 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+
+@{ 
+    int count = 0;
+}
+@foreach (var item in Model)
+{
+    <p>@count) @item.enonce</p>
+    @foreach(var x in item.Options)
+    {
+
+    }
+}
 <table class="table">
     <tr>
         <th>
@@ -30,7 +42,8 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+@foreach (var item in Model)
+{
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.Evaluation.date_creation)

@@ -1,0 +1,61 @@
+﻿@model QuizMeApp.Models.Question
+
+@{
+    ViewBag.Title = "Resultat";
+}
+
+<h2>Resultat</h2>
+
+<p>@ViewBag.verdict</p>
+
+<p>@Html.ActionLink("Question Suivante", "Suivant", "PasserEvaluation", routeValues: new { lastquestion = Model.Id}, htmlAttributes: null)</p>
+@*<div>
+    <h4>Question</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Evaluation.date_creation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Evaluation.date_creation)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.enonce)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.enonce)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.point)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.point)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.niveauDifficulte)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.niveauDifficulte)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.explication)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.explication)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>*@

@@ -17,7 +17,8 @@ namespace QuizMeApp.Controllers
         // GET: Objectifs
         public ActionResult Index()
         {
-            return View(db.Objectifs.ToList());
+            var objectifs = db.Objectifs.Include(o => o.Cours);
+            return View(objectifs.ToList());
         }
 
         // GET: Objectifs/Details/5
@@ -38,6 +39,7 @@ namespace QuizMeApp.Controllers
         // GET: Objectifs/Create
         public ActionResult Create()
         {
+            ViewBag.CoursId = new SelectList(db.Cours, "Id", "intitule");
             return View();
         }
 
@@ -46,7 +48,7 @@ namespace QuizMeApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,intitule")] Objectif objectif)
+        public ActionResult Create([Bind(Include = "Id,intitule,CoursId")] Objectif objectif)
         {
             if (ModelState.IsValid)
             {
@@ -55,6 +57,7 @@ namespace QuizMeApp.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.CoursId = new SelectList(db.Cours, "Id", "intitule", objectif.CoursId);
             return View(objectif);
         }
 
@@ -70,6 +73,7 @@ namespace QuizMeApp.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.CoursId = new SelectList(db.Cours, "Id", "intitule", objectif.CoursId);
             return View(objectif);
         }
 
@@ -78,7 +82,7 @@ namespace QuizMeApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,intitule")] Objectif objectif)
+        public ActionResult Edit([Bind(Include = "Id,intitule,CoursId")] Objectif objectif)
         {
             if (ModelState.IsValid)
             {
@@ -86,6 +90,7 @@ namespace QuizMeApp.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.CoursId = new SelectList(db.Cours, "Id", "intitule", objectif.CoursId);
             return View(objectif);
         }
 

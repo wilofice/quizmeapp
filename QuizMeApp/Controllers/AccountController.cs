@@ -81,7 +81,9 @@ namespace QuizMeApp.Controllers
                 case SignInStatus.Success:
                     ApplicationDbContext mondb = new ApplicationDbContext();
                     ApplicationUser user = mondb.Users.Where(usr => usr.Email == model.Email).Single();
+                    Session.Add("userId", user.Id);
                     return RedirectToAction("Acceuil", "Home", new { categorie = user.categorie });
+
                     //return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
@@ -154,7 +156,7 @@ namespace QuizMeApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, categorie = model.categorie, nom = model.nom, prenom = model.prenom };
+                var user = new ApplicationUser { UserName = model.nom + " " + model.prenom, Email = model.Email, categorie = model.categorie, nom = model.nom, prenom = model.prenom };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -166,7 +168,8 @@ namespace QuizMeApp.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
                     ApplicationDbContext mondb = new ApplicationDbContext();
-                    if (model.categorie.Equals("Ensiegnant"))
+                    Session.Add("userId", user.Id);
+                    if (model.categorie.Equals("Enseignant"))
                     {
                         Enseignant ens = new Enseignant { ID = user.Id, nom = user.nom, prenom = user.prenom };
                         mondb.Enseignants.Add(ens);
