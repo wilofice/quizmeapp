@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuizMeApp", "QuizMeApp\QuizMeApp.csproj", "{FFCB73A8-84BA-4AD0-A30F-E4684CA5A99B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuizMeApp.Tests", "QuizMeApp.Tests\QuizMeApp.Tests.csproj", "{2FD55FA9-D3A5-427E-BE39-F280E1A1D819}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FFCB73A8-84BA-4AD0-A30F-E4684CA5A99B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FFCB73A8-84BA-4AD0-A30F-E4684CA5A99B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FFCB73A8-84BA-4AD0-A30F-E4684CA5A99B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FFCB73A8-84BA-4AD0-A30F-E4684CA5A99B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2FD55FA9-D3A5-427E-BE39-F280E1A1D819}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2FD55FA9-D3A5-427E-BE39-F280E1A1D819}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2FD55FA9-D3A5-427E-BE39-F280E1A1D819}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2FD55FA9-D3A5-427E-BE39-F280E1A1D819}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
