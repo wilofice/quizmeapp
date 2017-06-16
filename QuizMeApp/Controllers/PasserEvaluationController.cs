@@ -21,6 +21,22 @@ namespace QuizMeApp.Controllers
 
         public ActionResult LancerEvaluation(int evaluationId)
         {
+            string userId = (string)Session["userId"];
+            Apprenant app = db.Apprenants.Where(ap => ap.ID == userId).Single();
+
+            Evaluation eva = db.Evaluations.Where(evv => evv.Id == evaluationId).Single();
+
+            Score score = new Score();
+
+            score.score = 0;
+            score.EvaluationId = evaluationId;
+            score.Evaluation = eva;
+            score.Apprenant = app;
+            score.ApprenantId = userId;
+
+            db.Scores.Add(score);
+
+            db.SaveChanges();
             var question = db.Questions.Where(rq => rq.EvaluationId == evaluationId).First();
 
             return View(question);
@@ -31,7 +47,32 @@ namespace QuizMeApp.Controllers
         {
             int question = Int32.Parse(questionId);
             Question q = db.Questions.Where(qre => qre.Id == question).Single();
+            string userId = (string)Session["userId"];
+
+            Apprenant app = db.Apprenants.Where(ap => ap.ID == userId).Single();
+
+            DateTime d = DateTime.Now;
+            string day = d.Day + "";
+            string month = d.Month + "";
+            string yeah = d.Year + "";
+            string date = day + "/" + month + "/" + yeah;
+
+            Reponse rep = new Reponse();
+            
+            rep.ApprenantId = userId;
+            rep.Apprenant = app;
+            rep.choix = intitule;
+            rep.dateReponse = date;
+            rep.QuestionId = question;
+            rep.Question = q;
+
+            db.Reponses.Add(rep);
+            db.SaveChanges();
+            
+
+            
             Option juste = null;
+
             foreach (Option op in q.Options)
             {
                 if(op.is_correct == true) { juste = op; }
@@ -40,6 +81,10 @@ namespace QuizMeApp.Controllers
             if(juste.intitule.Equals(intitule))
             {
                 ViewBag.verdict = "Bonne reponse! Cliquez sur suivant pour passer à la prochaine question";
+                Score score = db.Scores.Where(sc => sc.EvaluationId == q.EvaluationId && sc.ApprenantId == userId).Single();
+                score.score += q.point;
+                db.Entry(score).State = EntityState.Modified;
+                db.SaveChanges();
             } else
             {
                 ViewBag.verdict = "Mauvaise reponse! La bonne reponse était : " + juste.intitule;
@@ -53,20 +98,51 @@ namespace QuizMeApp.Controllers
             var question = db.Questions.Where(rq => rq.Id == lastquestion).Single();
             string userId = (string) Session["userId"];
 
-            List<Reponse> old_questions = db.Reponses.Include(rp => rp.Apprenant).Where(rp => rp.Question.EvaluationId == question.EvaluationId).ToList();
+            List<Reponse> old_questions = db.Reponses.Include(rp => rp.Apprenant).Where(rp => rp.Question.EvaluationId == question.EvaluationId && rp.ApprenantId == userId).ToList();
 
             List<Question> total_question = db.Questions.Where(qp => qp.EvaluationId == question.EvaluationId).ToList();
 
             List<Question> questions_restant = new List<Question>();
 
+            bool test = false;
             foreach(Question q in total_question)
             {
                 foreach(Reponse m in old_questions)
                 {
-                    if (q.Id == m.QuestionId) continue;
+                    if (q.Id == m.QuestionId)
+                    {
+                        test = true;
+                        break;
+                    }
+
+                }
+
+                if (test == true)
+                {
+                    test = false;
+                    continue;
                 }
 
                 questions_restant.Add(q);
+            }
+            if(questions_restant.Count() == 0)
+            {
+                
+                Evaluation eva = db.Evaluations.Where(evv => evv.Id == question.EvaluationId).Single();
+                Score score = db.Scores.Where(sc => sc.EvaluationId == question.EvaluationId && sc.ApprenantId == userId).Single();
+
+                List<Reponse> list_rep = db.Reponses.Where(repp => repp.ApprenantId == userId && repp.Question.EvaluationId == eva.Id).ToList();
+                foreach(Reponse x in list_rep)
+                {
+                    db.Reponses.Remove(x);
+                }
+
+                db.SaveChanges();
+
+                if (score.score >= eva.scoreSuccess) ViewBag.resultat_final = "Tres bien. Vous avez reussi l'evaluation! Votre score est : " + score.score;
+                else ViewBag.resultat_final = "Mauvais! Vous devez encore vous améliorer! Votre score est : " + score.score;
+
+                return View("FinEvaluation");
             }
 
             Question question_to_send = questions_restant.First();

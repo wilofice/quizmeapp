@@ -365,8 +365,8 @@
     <Content Include="Views\PasserEvaluation\LancerEvaluation.cshtml" />
     <Content Include="Views\PasserEvaluation\Edit.cshtml" />
     <Content Include="Views\PasserEvaluation\Index.cshtml" />
-    <None Include="Views\PasserEvaluation\pLancerEvaluation.cshtml" />
     <Content Include="Views\PasserEvaluation\Resultat.cshtml" />
+    <Content Include="Views\PasserEvaluation\FinEvaluation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
