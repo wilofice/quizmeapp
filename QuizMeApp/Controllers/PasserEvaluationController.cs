@@ -53,9 +53,25 @@ namespace QuizMeApp.Controllers
             var question = db.Questions.Where(rq => rq.Id == lastquestion).Single();
             string userId = (string) Session["userId"];
 
-            var old_questions = db.Reponses.Include(rp => rp.Apprenant);
+            List<Reponse> old_questions = db.Reponses.Include(rp => rp.Apprenant).Where(rp => rp.Question.EvaluationId == question.EvaluationId).ToList();
 
-            return View(question);
+            List<Question> total_question = db.Questions.Where(qp => qp.EvaluationId == question.EvaluationId).ToList();
+
+            List<Question> questions_restant = new List<Question>();
+
+            foreach(Question q in total_question)
+            {
+                foreach(Reponse m in old_questions)
+                {
+                    if (q.Id == m.QuestionId) continue;
+                }
+
+                questions_restant.Add(q);
+            }
+
+            Question question_to_send = questions_restant.First();
+
+            return View("LancerEvaluation", question_to_send);
         }
 
 
