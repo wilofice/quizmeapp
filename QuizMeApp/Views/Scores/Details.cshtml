@@ -1,0 +1,42 @@
+﻿@model QuizMeApp.Models.Score
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Score</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Apprenant.nom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Apprenant.nom)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Evaluation.date_creation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Evaluation.date_creation)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.score)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.score)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

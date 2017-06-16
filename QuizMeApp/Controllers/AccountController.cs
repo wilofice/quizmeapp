@@ -79,7 +79,10 @@ namespace QuizMeApp.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+                    ApplicationDbContext mondb = new ApplicationDbContext();
+                    ApplicationUser user = mondb.Users.Where(usr => usr.Email == model.Email).Single();
+                    return RedirectToAction("Acceuil", "Home", new { categorie = user.categorie });
+                    //return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
@@ -151,19 +154,33 @@ namespace QuizMeApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, categorie = model.categorie, nom = model.nom, prenom = model.prenom };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                    ApplicationDbContext mondb = new ApplicationDbContext();
+                    if (model.categorie.Equals("Ensiegnant"))
+                    {
+                        Enseignant ens = new Enseignant { ID = user.Id, nom = user.nom, prenom = user.prenom };
+                        mondb.Enseignants.Add(ens);
+                        mondb.SaveChanges();
+                    }
+                    else
+                    {
+                        Apprenant apprenant = new Apprenant { ID = user.Id, nom = user.nom, prenom = user.prenom };
+                        mondb.Apprenants.Add(apprenant);
+                        mondb.SaveChanges();
+                    }
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Acceuil", "Home", new { categorie = user.categorie });
+                    //return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);
             }

@@ -8,6 +8,12 @@ namespace QuizMeApp.Controllers
 {
     public class HomeController : Controller
     {
+        public ActionResult Acceuil(string categorie)
+        {
+            if (categorie.Equals("Enseignant")) return View("HomeEnseignant");
+            return View("HomeEtudiant");
+        }
+
         public ActionResult Index()
         {
             return View();

@@ -1,0 +1,56 @@
+﻿@model QuizMeApp.Models.Reponse
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Reponse</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Apprenant.nom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Apprenant.nom)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Question.enonce)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Question.enonce)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.choix)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.choix)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dateReponse)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dateReponse)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

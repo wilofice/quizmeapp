@@ -1,0 +1,42 @@
+﻿@model QuizMeApp.Models.Option
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Option</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Question.enonce)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Question.enonce)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.intitule)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.intitule)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.is_correct)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.is_correct)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

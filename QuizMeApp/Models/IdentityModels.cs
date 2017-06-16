@@ -9,6 +9,10 @@ namespace QuizMeApp.Models
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit http://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class ApplicationUser : IdentityUser
     {
+        public string nom { get; set; }
+        public string prenom { get; set; }
+        public string categorie { get; set; }
+
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
@@ -25,6 +29,25 @@ namespace QuizMeApp.Models
         {
         }
 
+        public DbSet<Enseignant> Enseignants { get; set; }
+        public DbSet<Apprenant> Apprenants { get; set; }
+
+        public DbSet<Cours> Cours { get; set; }
+
+        public DbSet<Certificat> Certificats { get; set; }
+
+        public DbSet<Evaluation> Evaluations { get; set; }
+
+        public DbSet<Objectif> Objectifs { get; set; }
+
+        public DbSet<Option> Options { get; set; }
+        public DbSet<Question> Questions { get; set; }
+
+        public DbSet<Reponse> Reponses { get; set; }
+
+        public DbSet<SousObjectif> SousObjectifs { get; set; }
+
+        public DbSet<Score> Scores { get; set; }
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();

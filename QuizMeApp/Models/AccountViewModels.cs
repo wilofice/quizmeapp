@@ -65,6 +65,18 @@ namespace QuizMeApp.Models
     public class RegisterViewModel
     {
         [Required]
+        [Display(Name = "Nom")]
+        public string nom { get; set; }
+
+        [Required]
+        [Display(Name = "Prenom")]
+        public string prenom { get; set; }
+
+        [Required]
+        [Display(Name = "Categorie")]
+        public string categorie { get; set; }
+
+        [Required]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
